@@ -1,0 +1,9 @@
+PhotoManager.MongoRepositories/bin
+PhotoManager.MongoRepositories/obj
+PhotoManager.Web/bin
+PhotoManager.Web/obj
+PhotoManager.Web/Logs
+PhotoManager.Web/PhotoManager.Web.csproj.user
+PhotoManager.Web/appsettings.Development.json
+PhotoManager.sln.DotSettings.user
+.vs/
