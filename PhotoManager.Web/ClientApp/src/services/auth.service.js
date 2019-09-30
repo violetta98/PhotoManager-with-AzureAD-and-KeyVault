@@ -21,7 +21,31 @@ export class AuthService {
         return this.msalApp.acquireTokenSilent(config.msal)
           .then(accessToken => {
               return accessToken;
-          });
+            },
+            error => {
+                console.log(error);
+                if (this.requiresInteraction(error.errorCode)) {
+                    return this.msalApp.acquireTokenPopup(config.msal)
+                        .then(accessToken => {
+                            return accessToken;
+                        },
+                        err => {
+                            console.error(err);
+                        }
+                    );
+                }
+            }
+          );
+    }
+
+    requiresInteraction(errorCode) {
+        if (!errorCode || !errorCode.length) {
+            return false;
+        }
+        
+        return errorCode === 'consent_required' ||
+            errorCode === 'interaction_required' ||
+            errorCode === 'login_required';
     }
 
     signedIn() {
